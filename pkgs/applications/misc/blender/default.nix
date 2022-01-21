@@ -4,6 +4,7 @@
 , libtiff, libGLU, libGL, openal, opencolorio, openexr, openimagedenoise, openimageio2, openjpeg, python39Packages
 , openvdb, libXxf86vm, tbb, alembic
 , zlib, fftw, opensubdiv, freetype, jemalloc, ocl-icd, addOpenGLRunpath
+, zstd, c-blosc
 , jackaudioSupport ? false, libjack2
 , cudaSupport ? config.cudaSupport or false, cudatoolkit
 , colladaSupport ? true, opencollada
@@ -26,11 +27,12 @@ let
 in
 stdenv.mkDerivation rec {
   pname = "blender";
-  version = "2.93.5";
+  version = "3.0.0";
 
   src = fetchurl {
     url = "https://download.blender.org/source/${pname}-${version}.tar.xz";
-    sha256 = "1fsw8w80h8k5w4zmy659bjlzqyn5i198hi1kbpzfrdn8psxg2bfj";
+    # sha256 = "0bfmhjvdpnxwyby4h4xlad8691y3yv68yfrjgan81kpxa1hv7x27";
+    sha256 = "1jzirg60c2lhln78a7phbsk2ssvcdqxqb3awp895m0pqrlmz7w2h";
   };
 
   patches = lib.optional stdenv.isDarwin ./darwin.patch;
@@ -41,6 +43,7 @@ stdenv.mkDerivation rec {
     [ boost ffmpeg gettext glew ilmbase
       freetype libjpeg libpng libsamplerate libsndfile libtiff
       opencolorio openexr openimagedenoise openimageio2 openjpeg python zlib fftw jemalloc
+      zstd c-blosc
       alembic
       (opensubdiv.override { inherit cudaSupport; })
       tbb

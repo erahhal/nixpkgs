@@ -101,8 +101,8 @@ in
       # https://help.ubnt.com/hc/en-us/articles/218506997
       allowedTCPPorts = [
         8080  # Port for UAP to inform controller.
+        8443  # Port for HTTPS portal redirect, ditto.
         8880  # Port for HTTP portal redirect, if guest portal is enabled.
-        8843  # Port for HTTPS portal redirect, ditto.
         6789  # Port for UniFi mobile speed test.
       ];
       allowedUDPPorts = [
